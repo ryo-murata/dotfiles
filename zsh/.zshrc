@@ -161,5 +161,5 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/faru/.sdkman"
-[[ -s "/Users/faru/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/faru/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

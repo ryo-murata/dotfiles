@@ -1,7 +1,7 @@
 export PIPENV_VENV_IN_PROJECT=1
 
 export PATH="$HOME/.poetry/bin:$PATH"
-export PATH=$PATH:/Users/faru/.nodebrew/current/bin
+export PATH=$PATH:$HOME/.nodebrew/current/bin
 export EDITOR=code
 
 export PYENV_ROOT="$HOME/.pyenv"
