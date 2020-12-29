@@ -1,9 +1,3 @@
-# pipenv補完
-eval "$(pipenv --completion)"
-
-# java8をデフォルトHOMEに設定
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 setopt IGNOREEOF
 
@@ -14,9 +8,6 @@ colors
 # 補完
 autoload -Uz compinit
 compinit
-
-# emacsキーバインド
-bindkey -e
 
 # 他のターミナルとヒストリーを共有
 setopt share_history
@@ -161,5 +152,28 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/faru/.sdkman"
+[[ -s "/Users/faru/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/faru/.sdkman/bin/sdkman-init.sh"
+export PATH=$HOME/.poetry/bin:$PATH
+
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+[[ /Users/faru/.asdf/shims/kubectl ]] && source <(kubectl completion zsh)
+alias k=kubectl
+complete -o default -F __start_kubectl k
+
+. $(brew --prefix asdf)/asdf.sh
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
