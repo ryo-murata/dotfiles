@@ -1,5 +1,9 @@
-export PIPENV_VENV_IN_PROJECT=1
+#! /bin/env zsh
 
-export PATH="$HOME/.poetry/bin:$PATH"
-export PATH=$PATH:/Users/faru/.nodebrew/current/bin
-export EDITOR=code
+# XDG Base Directory
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+# zsh home directory
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh

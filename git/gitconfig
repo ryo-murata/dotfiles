@@ -1,0 +1,8 @@
+[user]
+	name = faruryo
+	email = faruryo@gmail.com
+[core]
+	autocrlf = input
+	editor = code --wait
+[status]
+	submoduleSummary = true
