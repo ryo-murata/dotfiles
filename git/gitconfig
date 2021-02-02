@@ -6,3 +6,5 @@
 	editor = code --wait
 [status]
 	submoduleSummary = true
+[credential]
+	helper = osxkeychain
