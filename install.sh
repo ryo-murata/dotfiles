@@ -36,16 +36,16 @@ dot_files=(
 )
 for file in "${!dot_files[@]}"; do
     if [[ -f  $HOME/.$file && ! -L $HOME/.$file ]]; then
-        mv $HOME/.$file $HOME/.$file.$(date +'%Y%m%d%H%M%S').backup
+        mv -v $HOME/.$file $HOME/.$file.$(date +'%Y%m%d%H%M%S').backup
     fi
-    ln -snf $DOTPATH/${dot_files[$file]} $HOME/.$file
+    ln -vsnf $DOTPATH/${dot_files[$file]} $HOME/.$file
 done
 
 # directories
 link_dirs=(zsh git tmux)
 for dir in "${link_dirs[@]}"; do
     if [[ -d "$XDG_CONFIG_HOME/$dir"  && ! -L "$XDG_CONFIG_HOME/$dir" ]]; then
-        mv $XDG_CONFIG_HOME/$dir $XDG_CONFIG_HOME/$dir.$(date +'%Y%m%d%H%M%S').backup
+        mv -v $XDG_CONFIG_HOME/$dir $XDG_CONFIG_HOME/$dir.$(date +'%Y%m%d%H%M%S').backup
     fi
-    ln -snf $DOTPATH/$dir $XDG_CONFIG_HOME/$dir
+    ln -vsnf $DOTPATH/$dir $XDG_CONFIG_HOME/$dir
 done
