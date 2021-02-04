@@ -42,7 +42,7 @@ for file in "${!dot_files[@]}"; do
 done
 
 # directories
-link_dirs=(zsh git)
+link_dirs=(zsh git tmux)
 for dir in "${link_dirs[@]}"; do
     if [[ -d "$XDG_CONFIG_HOME/$dir"  && ! -L "$XDG_CONFIG_HOME/$dir" ]]; then
         mv $XDG_CONFIG_HOME/$dir $XDG_CONFIG_HOME/$dir.$(date +'%Y%m%d%H%M%S').backup
