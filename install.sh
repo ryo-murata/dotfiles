@@ -44,7 +44,7 @@ done
 # directories
 link_dirs=(zsh git tmux)
 for dir in "${link_dirs[@]}"; do
-    if [[ -d "$XDG_CONFIG_HOME/$dir"  && ! -L "$XDG_CONFIG_HOME/$dir" ]]; then
+    if [[ -d "$XDG_CONFIG_HOME/$dir" && ! -L "$XDG_CONFIG_HOME/$dir" ]]; then
         mv -v $XDG_CONFIG_HOME/$dir $XDG_CONFIG_HOME/$dir.$(date +'%Y%m%d%H%M%S').backup
     fi
     ln -vsnf $DOTPATH/$dir $XDG_CONFIG_HOME/$dir
