@@ -14,3 +14,6 @@ complete -o default -F __start_kubectl k
 
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# direnv
+emulate zsh -c "$(direnv hook zsh)"
