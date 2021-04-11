@@ -7,6 +7,9 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # kubectl
 [[ /Users/faru/.asdf/shims/kubectl ]] && source <(kubectl completion zsh)
 alias k=kubectl
