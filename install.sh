@@ -49,3 +49,19 @@ for dir in "${link_dirs[@]}"; do
     fi
     ln -vsnf $DOTPATH/$dir $XDG_CONFIG_HOME/$dir
 done
+
+# 変数チェック
+vars=(GIT_NAME GIT_EMAIL GIT_SIGNINGKEY)
+for var in "${vars[@]}"; do
+    eval 'echo $'$var > /dev/null
+done
+
+# template展開
+vars_str=\$$(echo ${vars[@]} | sed 's/ /$/g')
+for dir in "${link_dirs[@]}"; do
+    # envsubst < git/gitconfig.tmpl
+    for file in $(find . -path "./${dir}/*.tmpl"); do
+        echo $file => ${file%.tmpl}
+        cat ${file} | envsubst "${vars_str}" > ${file%.tmpl}
+    done
+done

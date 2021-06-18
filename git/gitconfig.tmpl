@@ -1,0 +1,15 @@
+[user]
+	name = $GIT_NAME
+	email = $GIT_EMAIL
+	signingkey = $GIT_SIGNINGKEY
+[core]
+	autocrlf = input
+	editor = code --wait
+[status]
+	submoduleSummary = true
+[credential]
+	helper = osxkeychain
+[gpg]
+	program = /usr/local/bin/gpg
+[commit]
+	gpgsign = true
