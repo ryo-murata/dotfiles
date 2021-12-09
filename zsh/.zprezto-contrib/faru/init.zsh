@@ -11,7 +11,11 @@ export PATH=$PATH:$GOBIN
 export PATH="$HOME/.poetry/bin:$PATH"
 
 # kubectl
-[[ /Users/faru/.asdf/shims/kubectl ]] && source <(kubectl completion zsh)
+if [[ -r $HOME/.asdf/shims/kubectl ]]; then
+    source <(kubectl completion zsh)
+elif [[ -r /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/kubectl ]]; then
+    source <(kubectl completion zsh)
+fi
 alias k=kubectl
 complete -o default -F __start_kubectl k
 
