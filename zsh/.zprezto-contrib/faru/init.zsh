@@ -31,6 +31,3 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 # gpg
 export GPG_TTY=$(tty)
-
-## nodebrew
-[[ -r $HOME/.nodebrew/current/bin ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
