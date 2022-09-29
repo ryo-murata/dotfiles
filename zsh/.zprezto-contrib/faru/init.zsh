@@ -45,6 +45,3 @@ source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.z
 
 # gpg
 export GPG_TTY=$(tty)
-
-## nodebrew
-[[ -r $HOME/.nodebrew/current/bin ]] && export PATH=$HOME/.nodebrew/current/bin:$PATH
