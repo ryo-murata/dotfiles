@@ -1,3 +1,17 @@
+#brew
+if [[ -r /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+if [[ -r /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# complete
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    autoload -Uz compinit && compinit
+fi
 
 # asdf
 . $(brew --prefix asdf)/asdf.sh
@@ -13,11 +27,11 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # kubectl
 if [[ -r $HOME/.asdf/shims/kubectl ]]; then
     source <(kubectl completion zsh)
-elif [[ -r /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/kubectl ]]; then
+elif [[ -r $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/kubectl ]]; then
     source <(kubectl completion zsh)
 fi
 alias k=kubectl
-complete -o default -F __start_kubectl k
+compdef __start_kubectl k
 
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -26,8 +40,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 emulate zsh -c "$(direnv hook zsh)"
 
 # gcloud
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 # gpg
 export GPG_TTY=$(tty)
