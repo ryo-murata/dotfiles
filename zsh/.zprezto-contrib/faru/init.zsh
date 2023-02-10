@@ -14,7 +14,12 @@ if type brew &>/dev/null; then
 fi
 
 # asdf
-. $(brew --prefix asdf)/asdf.sh
+if [[ -r $(brew --prefix asdf)/asdf.sh ]]; then
+    . $(brew --prefix asdf)/asdf.sh
+fi
+if [[ -r $(brew --prefix asdf)/libexec/asdf.sh ]]; then
+    . $(brew --prefix asdf)/libexec/asdf.sh
+fi
 
 # go
 export GOPATH=$HOME/go
