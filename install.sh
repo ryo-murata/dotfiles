@@ -13,19 +13,61 @@ e_error() {
     printf "\033[31m%s\033[m\n" "✖ $*" 1>&2
 }
 
+### install packages by install
+
 brew install zsh-completions
 chmod -R go-w $(brew --prefix)/share
 
-brew install zsh-autosuggestions
+BREW_PACKAGES=(
+    "zsh-autosuggestions"
+    "google-cloud-sdk"
+    "pinentry-mac"
+    "asdf"
+    "direnv"
+    "bat"
+    "fd"
+    "fzf"
+    "iTerm2"
+    "lazydocker"
+    "lazygit"
+    "ripgrep"
+    "starship"
+    "tmux"
+    "yabai"
+    "skhd"
+    "visual-studio-code"
+)
 
-brew install google-cloud-sdk
-brew install pinentry-mac
-brew install asdf
-brew install direnv
+brew install ${BREW_PACKAGES[@]}
 
-asdf plugin-add nodejs
-asdf install nodejs latest
-asdf global nodejs latest
+
+### install tools by asdf
+
+ASDF_PACKAGES=(
+    "argocd"
+    "golang"
+    "helm"
+    "hugo"
+    "kustomize"
+    "nodejs"
+    "stern"
+)
+
+for p in ${ASDF_PACKAGES[@]}; do
+    asdf plugin-add ${p}
+    asdf install ${p} latest
+    asdf global ${p} latest
+done
+
+
+### install tmux plugins
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+### Setting key repeat
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -float 1.3
+
 
 DOTPATH=${DOTPATH:-$HOME/.dotfiles}
 REPO="https://github.com/ryo-murata/dotfiles"
@@ -56,7 +98,7 @@ for file in "${!dot_files[@]}"; do
 done
 
 # directories
-link_dirs=(zsh git tmux)
+link_dirs=(git skhd tmux tmux yabai)
 for dir in "${link_dirs[@]}"; do
     if [[ -d "$XDG_CONFIG_HOME/$dir" && ! -L "$XDG_CONFIG_HOME/$dir" ]]; then
         mv -v $XDG_CONFIG_HOME/$dir $XDG_CONFIG_HOME/$dir.$(date +'%Y%m%d%H%M%S').backup

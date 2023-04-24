@@ -50,3 +50,61 @@ source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.z
 
 # gpg
 export GPG_TTY=$(tty)
+
+
+# gary tools
+alias ja='pwd >> ~/.jumpmarks | sort -u ~/.jumpmarks > ~/.tmpmarks && mv ~/.tmpmarks ~/.jumpmarks'
+alias jc='cat ~/.jumpmarks | grep -v "^\s*#" | grep -v "^\s*$" | fzf --reverse'
+alias ju='cd "$(jc)"'
+
+function _fdf (){
+    export FZF_DEFAULT_COMMAND="fd \
+        --type=file \
+        --hidden \
+        --case-sensitive \
+        --exclude '.git'
+        "
+
+    selected=$(
+        fzf \
+            --ansi \
+            --reverse \
+            --bind "ctrl-t:execute-silent(code -g $PWD/{1..3})" \
+            --preview-window 'right,50%,border-left' \
+            --preview 'bat --color=always {1}'
+    )
+
+    [[ -n $selected ]] && code -g "$PWD"/"$selected"
+}
+
+alias fdf='_fdf'
+
+function _rgf (){
+    RG_PREFIX="rg \
+        --color=never \
+        --no-heading \
+        --with-filename \
+        --line-number \
+        --column \
+        --smart-case \
+        --hidden \
+        --glob '!.git/'"
+
+    INITIAL_QUERY="${*:-}"
+
+    IFS=: read -ra selected < <(
+        FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" \
+            fzf --ansi \
+            --disabled --query "$INITIAL_QUERY" \
+            --delimiter : \
+            --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+            --bind "ctrl-t:execute-silent(code -g $PWD/{1..3})" \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
+            --preview-window 'right,50%,border-left'
+    )
+
+    [ -n "${selected[0]}" ] && code -g "${selected[0]}:${selected[1]}"
+}
+
+alias rgf='_rgf'
+alias tt='if [ -z "$TMUX" ] && [ ${UID} != 0 ]; then; tmux new-session -A -s main; fi'
