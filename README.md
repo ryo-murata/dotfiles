@@ -26,5 +26,5 @@
 1. install実行
 
     ```sh
-    curl https://raw.githubusercontent.com/faruryo/dotfiles/master/install.sh | $(brew --prefix)/bin/bash
+    curl https://raw.githubusercontent.com/ryo-murata/dotfiles/master/install.sh | $(brew --prefix)/bin/bash
     ```

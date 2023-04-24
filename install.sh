@@ -28,7 +28,7 @@ asdf install nodejs latest
 asdf global nodejs latest
 
 DOTPATH=${DOTPATH:-$HOME/.dotfiles}
-REPO="https://github.com/faruryo/dotfiles"
+REPO="https://github.com/ryo-murata/dotfiles"
 
 # if [ -d "$DOTPATH" ]; then
 #     e_error "$DOTPATH: already exists"
