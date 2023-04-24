@@ -30,10 +30,10 @@ asdf global nodejs latest
 DOTPATH=${DOTPATH:-$HOME/.dotfiles}
 REPO="https://github.com/ryo-murata/dotfiles"
 
-# if [ -d "$DOTPATH" ]; then
-#     e_error "$DOTPATH: already exists"
-#     exit 1
-# fi
+if [ -d "$DOTPATH" ]; then
+    e_error "$DOTPATH: already exists"
+    exit 1
+fi
 
 e_newline
 e_header "Downloading dotfiles..."
