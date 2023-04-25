@@ -53,8 +53,10 @@ export GPG_TTY=$(tty)
 
 
 # gary tools
-alias ja='pwd >> ~/.jumpmarks | sort -u ~/.jumpmarks > ~/.tmpmarks && mv ~/.tmpmarks ~/.jumpmarks'
-alias jc='cat ~/.jumpmarks | grep -v "^\s*#" | grep -v "^\s*$" | fzf --reverse'
+export JUMPMARKS=~/.jumpmarks
+touch $JUMPMARKS
+alias ja='pwd >> $JUMPMARKS | sort -o $JUMPMARKS $JUMPMARKS'
+alias jc='cat $JUMPMARKS | grep -v "^\s*#" | grep -v "^\s*$" | fzf --reverse'
 alias ju='cd "$(jc)"'
 
 function _fdf (){
