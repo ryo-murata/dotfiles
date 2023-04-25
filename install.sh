@@ -13,6 +13,21 @@ e_error() {
     printf "\033[31m%s\033[m\n" "✖ $*" 1>&2
 }
 
+### check
+DOTPATH=${DOTPATH:-$HOME/.dotfiles}
+REPO="https://github.com/ryo-murata/dotfiles"
+
+if [ -d "$DOTPATH" ]; then
+    e_error "$DOTPATH: already exists"
+    exit 1
+fi
+
+# 変数チェック
+vars=(GIT_NAME GIT_EMAIL GIT_SIGNINGKEY)
+for var in "${vars[@]}"; do
+    eval 'echo $'$var > /dev/null
+done
+
 ### install packages by install
 
 brew install zsh-completions
@@ -68,15 +83,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -float 1.3
 
-
-DOTPATH=${DOTPATH:-$HOME/.dotfiles}
-REPO="https://github.com/ryo-murata/dotfiles"
-
-if [ -d "$DOTPATH" ]; then
-    e_error "$DOTPATH: already exists"
-    exit 1
-fi
-
 e_newline
 e_header "Downloading dotfiles..."
 git clone --recursive "$REPO" "$DOTPATH"
@@ -104,12 +110,6 @@ for dir in "${link_dirs[@]}"; do
         mv -v $XDG_CONFIG_HOME/$dir $XDG_CONFIG_HOME/$dir.$(date +'%Y%m%d%H%M%S').backup
     fi
     ln -vsnf $DOTPATH/$dir $XDG_CONFIG_HOME/$dir
-done
-
-# 変数チェック
-vars=(GIT_NAME GIT_EMAIL GIT_SIGNINGKEY)
-for var in "${vars[@]}"; do
-    eval 'echo $'$var > /dev/null
 done
 
 # template展開
