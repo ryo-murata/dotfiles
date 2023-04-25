@@ -115,8 +115,7 @@ done
 # template展開
 vars_str=\$$(echo ${vars[@]} | sed 's/ /$/g')
 for dir in "${link_dirs[@]}"; do
-    # envsubst < git/gitconfig.tmpl
-    for file in $(find . -path "./${dir}/*.tmpl"); do
+    for file in $(find ${DOTPATH} -path "./${dir}/*.tmpl"); do
         echo $file => ${file%.tmpl}
         cat ${file} | envsubst "${vars_str}" > ${file%.tmpl}
     done
