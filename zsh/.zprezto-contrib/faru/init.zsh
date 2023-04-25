@@ -88,11 +88,11 @@ function _rgf (){
         --column \
         --smart-case \
         --hidden \
-        --glob '!.git/'"
+        --glob '\!.git/'"
 
     INITIAL_QUERY="${*:-}"
 
-    IFS=: read -ra selected < <(
+    selected=$(
         FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" \
             fzf --ansi \
             --disabled --query "$INITIAL_QUERY" \
@@ -103,7 +103,9 @@ function _rgf (){
             --preview-window 'right,50%,border-left'
     )
 
-    [ -n "${selected[0]}" ] && code -g "${selected[0]}:${selected[1]}"
+    selected_array=(${(s/:/)selected})
+
+    [ -n "${selected_array[1]}" ] && code -g "${selected_array[1]}:${selected_array[2]}:${selected_array[3]}"
 }
 
 alias rgf='_rgf'
