@@ -90,7 +90,7 @@ function _rgf (){
         --column \
         --smart-case \
         --hidden \
-        --glob '\!.git/'"
+        --glob '\!.git'"
 
     INITIAL_QUERY="${*:-}"
 
