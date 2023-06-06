@@ -34,23 +34,24 @@ brew install zsh-completions
 chmod -R go-w $(brew --prefix)/share
 
 BREW_PACKAGES=(
-    "zsh-autosuggestions"
-    "google-cloud-sdk"
-    "pinentry-mac"
     "asdf"
-    "direnv"
     "bat"
+    "direnv"
     "fd"
     "fzf"
+    "google-cloud-sdk"
     "iTerm2"
     "lazydocker"
     "lazygit"
+    "pinentry-mac"
+    "rg"
     "ripgrep"
+    "skhd"
     "starship"
     "tmux"
-    "yabai"
-    "skhd"
     "visual-studio-code"
+    "yabai"
+    "zsh-autosuggestions"
 )
 
 brew install ${BREW_PACKAGES[@]}
